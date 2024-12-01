@@ -9,7 +9,7 @@ class SinglyLinkedList:
         self.last = None # referência para o último nó da lista
         self.node_counter = 0 # contador de nós
 
-    def addFirst(self, obj):
+    def add_first(self, obj):
         new_node = Node(obj) # cria um novo nó com a informação fornecida
         new_node.next = self.first # faz o novo nó apontar para o antigo primeiro, agora segundo nó
         self.first = new_node # atualiza o ponteiro "primeiro"
@@ -19,9 +19,9 @@ class SinglyLinkedList:
 
         self.node_counter += 1 # incrementa o contador
 
-    def addLast(self, obj):
+    def add_last(self, obj):
         if self.node_counter == 0:
-            self.addFirst(obj) # se a lista estiver vazia, adiciona no ínicio
+            self.add_first(obj) # se a lista estiver vazia, adiciona no ínicio
 
         else:
             new_node = Node(obj) # se a lista não estiver vazia, cria um novo nó com a informação fornecida
@@ -31,15 +31,15 @@ class SinglyLinkedList:
 
             self.node_counter += 1 # incrementa o contador
 
-    def addAt(self, position, obj):
+    def add_at(self, position, obj):
         if position == 0:
-            self.addFirst(obj) # se a posição informada for a primeira, adiciona no começo
+            self.add_first(obj) # se a posição informada for a primeira, adiciona no começo
 
         elif position == self.node_counter:
-            self.addLast(obj) # se a posição informada for a última, adiciona no final
+            self.add_last(obj) # se a posição informada for a última, adiciona no final
 
         else:
-            prev_node = self.getNode(position - 1) # obtém o nó anterior à posição informada
+            prev_node = self.get_node(position - 1) # obtém o nó anterior à posição informada
 
             new_node = Node(obj) # cria o novo nó
 
@@ -63,10 +63,10 @@ class SinglyLinkedList:
         return False # caso não ache, retorna False
     
     def get(self, position):
-        return self.getNode(position).data
+        return self.get_node(position).data
     
-    def removeFirst(self):
-        if not self.busyPosition(0):
+    def remove_first(self):
+        if not self.busy_position(0):
             raise IndexError('List is empty') # se a lista estiver vazia, retorna mensagem de erro
         
         self.first = self.first.next # atualiza o ponteiro "primeiro"
@@ -76,8 +76,8 @@ class SinglyLinkedList:
 
         self.node_counter -= 1
 
-    def removeLast(self):
-        if not self.busyPosition(self.node_counter - 1):
+    def remove_last(self):
+        if not self.busy_position(self.node_counter - 1):
             raise IndexError('List is empty') # se a lista estiver vazia, retorna mensagem de erro
         
         if self.node_counter == 1: # caso só haja um elemento antes da remoção, atualiza ambos os ponteiros para None
@@ -85,31 +85,38 @@ class SinglyLinkedList:
             self.last = None
 
         else:
-            penultimate_node = self.getNode(self.node_counter - 2) # obtém o penúltimo nó
+            penultimate_node = self.get_node(self.node_counter - 2) # obtém o penúltimo nó
             penultimate_node.next = None # faz o penúltimo nó não apontar para nenhum outro
             self.last = penultimate_node # atualiza o ponteiro "último"
 
-    def removeAt(self, position):
-        if not self.busyPosition(position):
+    def remove_at(self, position):
+        if not self.busy_position(position):
             raise IndexError('Index out of range') # se o índice for inválido, mostra mensagem de erro
         
         if position == 0:
-            self.removeFirst() # se a posição informada for a primeira, remove o primeiro
+            self.remove_first() # se a posição informada for a primeira, remove o primeiro
 
         elif position == self.node_counter - 1:
-            self.removeLast() # se a posição informada for a última, remove o último
+            self.remove_last() # se a posição informada for a última, remove o último
 
         else:
-            prev_node = self.getNode(position - 1) # obtém o nó anterior
+            prev_node = self.get_node(position - 1) # obtém o nó anterior
             prev_node.next = prev_node.next.next # atualiza o próximo do nó anterior
             self.node_counter -= 1 # decrementa o contador
 
+    def is_empty(self):
+        return self.node_counter == 0 # retorna True se a lista estiver vazia e False se não estiver
+    
+    def clear(self):
+        self.first = None # reseta o ponteiro "primeiro"
+        self.last = None # reseta o ponteiro "último"
+        self.node_counter = 0 # reseta o contador
 
-    def busyPosition(self, position):
+    def busy_position(self, position):
         return 0 <= position < self.node_counter # retorna True se a posição estiver ocupada, False se não estiver
     
-    def getNode(self, position):
-        if not self.busyPosition(position): # verifica se a posição está ocupada
+    def get_node(self, position):
+        if not self.busy_position(position): # verifica se a posição está ocupada
             raise ValueError('Invalid position') # se não estiver, mostra mensagem de erro
         
         current_node = self.first # define o primeiro nó como o primeiro da iteração
@@ -118,3 +125,19 @@ class SinglyLinkedList:
             current_node = current_node.next # encontra a posição desejada
 
         return current_node # retorna o nó encontrado
+    
+    def __str__(self) -> str:
+        result = '['  # adiciona o colchete de abertura
+        current_node = self.first # define o primeiro nó como o atual
+
+        while current_node is not None:
+            result += str(current_node.data) # adiciona o nó da vez como string
+
+            if current_node.next is not None:
+                result += ', ' # adiciona uma vírgula e um espaço para separar os nós, exceto se for o último
+
+            current_node = current_node.next # move para o próximo nó
+        
+        result += ']' # adiciona o colchete de abertura
+
+        return result # retorna a string final
