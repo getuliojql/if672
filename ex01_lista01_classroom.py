@@ -10,7 +10,7 @@ class ObjectArrayList:
         self.objects[self.object_counter] = obj # adiciona o elemento no final
         self.object_counter += 1 # incrementa o contador
 
-    def add_at(self, position, obj):
+    def addAt(self, position, obj):
         if position < 0 or position > self.object_counter: # verifica se a posição é válida
             raise IndexError('Index out of range') # se o índice for inválido, mostra mensagem de erro
 
@@ -23,7 +23,7 @@ class ObjectArrayList:
         self.objects[position] = obj # adiciona o elemento na posição especificada
         self.object_counter += 1 # incrementa o contador
 
-    def add_all(self, position, elements):
+    def addAll(self, position, elements):
         if position < 0 or position > self.object_counter: # verifica se a posição é válida
             raise IndexError('Index out of range') # se o índice for inválido, mostra mensagem de erro
         
@@ -41,12 +41,12 @@ class ObjectArrayList:
     def remove(self, obj):
         for i in range(self.object_counter):
             if self.objects[i] == obj: # encontra o elemento determinado
-                self.remove_at(i) # remove o elemento utilizando sua posição
+                self.removeAt(i) # remove o elemento utilizando sua posição
                 return
 
         raise ValueError('Element not found') # se o elemento não for encontrado, mostra mensagem de erro
 
-    def remove_at(self, index):
+    def removeAt(self, index):
         if 0 <= index < self.object_counter: # verifica se o índice é válido
             for i in range(index, self.object_counter - 1): # desloca os elementos subsequentes para esquerda
                 self.objects[i] = self.objects[i + 1]
@@ -64,7 +64,7 @@ class ObjectArrayList:
         else:
             raise IndexError('Index out of range') # se o índice for inválido, mostra mensagem de erro
         
-    def is_empty(self):
+    def isEmpty(self):
         return self.object_counter == 0 # retorna True se a array estiver vazia e False se não estiver
     
     def size(self):
