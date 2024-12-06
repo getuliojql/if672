@@ -1,4 +1,4 @@
-from ex02_lista01_classroom import SinglyLinkedList
+from lista01.ex02_classroom import SinglyLinkedList
 
 class Queue:
     def __init__(self):

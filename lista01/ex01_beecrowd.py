@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class Node:
     def __init__(self, data):
         self.data = data # armazena a informação do nó

@@ -1,8 +1,8 @@
-from ex01_lista01_classroom import ObjectArrayList
-from ex02_lista01_classroom import SinglyLinkedList
-from ex03_lista01_classroom import DoublyLinkedList
-from ex04_lista01_classroom import Stack
-from ex05_lista01_classroom import Queue
+from lista01.ex01_classroom import ObjectArrayList
+from lista01.ex02_classroom import SinglyLinkedList
+from lista01.ex03_classroom import DoublyLinkedList
+from lista01.ex04_classroom import Stack
+from lista01.ex05_classroom import Queue
 
 def main():
     print('=== Testando Lista ===')
